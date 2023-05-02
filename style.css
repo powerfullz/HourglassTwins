@@ -9,10 +9,11 @@ License: Apache License 2.0
 License URI: http://www.apache.org/licenses/
 Tags: light,dark
 */
-
-* {
-    font-family: 'Noto Serif SC', serif;
+*{
+	font-family: 'Noto Serif SC', serif;
 }
+	
+
 
 #page {
     width: 40%;
@@ -34,7 +35,7 @@ h1, h2, h3, h4, h5 {
     font-weight: bold;
 }
 
-/* 手机 */
+/* æ‰‹æœº */
 @media screen and (max-width: 840px) {
     #page {
         width: 90%;
@@ -373,6 +374,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
+    appearance: button;
     -webkit-appearance: button;
 }
 
@@ -465,6 +467,7 @@ textarea {
  */
 
 [type="search"] {
+    appearance: textfield;
     -webkit-appearance: textfield; /* 1 */
     outline-offset: -2px; /* 2 */
 }
@@ -557,20 +560,21 @@ h2, h3, h4, h5, h6 {
 
 h1 {
     margin-top: 1em;
+    font-size: 1.7em;
 }
 
 h2 {
     margin-top: 0.6em;
-    font-size: 1.7em;
+    font-size: 1.4em;
 }
 
 h3 {
     margin-top: 0.2em;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 h4 {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 h5 {
@@ -619,15 +623,20 @@ address {
 }
 
 code, kbd, tt, var {
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     color: var(--main);
     background: var(--code);
     padding: 2px;
     border-radius: 4px;
 }
-
-.wp-block-code code {
-    word-spacing: 0.3em;
+pre{
+	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    align-content: inherit;
 }
+
+/* .wp-block-code code {
+    word-spacing: 0.3em;
+} */
 
 pre code:not(.hljs):not([class*="language-"]) {
     background: var(--code);
@@ -974,7 +983,7 @@ a.to-top {
 }
 
 .hentry {
-    margin: 0 0 2em;
+    margin: 0 0 1.5em;
 }
 
 .updated:not(.published) {
@@ -1136,12 +1145,6 @@ h3.comments-title:after {
 
 .comment .comment-metadata span {
     font-size: 12px;
-}
-
-.comment .comment-metadata span.comment-btn-reply a:hover {
-}
-
-.comment .comment-metadata span.comment-btn-reply i {
 }
 
 .comment .comment-metadata span.comment-btn-reply a {
@@ -1499,7 +1502,7 @@ svg * {
 }
 
 .post-content {
-    padding-top: 2.5em;
+    padding-top: 1.7em;
     padding-bottom: 2em;
     word-wrap: break-word;
     word-break: break-all;
@@ -1521,8 +1524,8 @@ svg * {
 }
 
 .post-title h1, .post-title h2 {
-    margin: 0 0 .1em 0;
-    line-height: 1.2em;
+	margin: 0 0 .1em 0;
+	line-height: 1.2em;
 }
 
 .post-title a:hover, .post-title a:focus, .post-title a:active, .entry-title a:hover, .entry-title a:visited {

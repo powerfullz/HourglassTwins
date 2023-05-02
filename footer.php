@@ -12,7 +12,7 @@
 
 <footer id="colophon">
     <p>Powered by<a href="https://cn.wordpress.org/" target="_blank" title="优雅的个人发布平台">WordPress</a> with Theme <a
-                href="https://jakting.com/archives/hourglass-twins.html" target="_blank">HourglassTwins</a><br>
+                href="https://jakting.com/archives/hourglass-twins.html" target="_blank">HourglassTwins</a> Modified by <a href="https://l3zc.com">L3ZC</a><br>
 
         Copyright &copy; <?php echo get22min("found_year", "2012") . ' - ' . date('Y') ?> <?php bloginfo('name') ?>
         <?php get_search_form(); ?>

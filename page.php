@@ -11,9 +11,7 @@ get_header();
                 <h1><?php the_title(); ?></h1>
             </div>
             <span title="发表于 <?php the_time('Y 年 m 月 d 日') ?>"><i
-                        class="fas fa-hourglass-start"></i> <?php the_time('Y 年 m 月 d 日') ?></span> / <span
-                title="修改于：<?php the_modified_time('Y 年 m 月 d 日') ?>"><i
-                    class="fas fa-hourglass-end"></i> <?php the_modified_time('Y 年 m 月 d 日') ?></span>
+                        class="fas fa-hourglass-start"></i> <?php the_time('Y 年 m 月 d 日') ?></span>
             <?php edit_post_link(' [编辑页面]', '<span>', '</span>', 0, ''); ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             <div class="post-content">

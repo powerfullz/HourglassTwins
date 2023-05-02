@@ -23,8 +23,7 @@ get_header();
                                     aria-hidden="true"></i> <?php $categories = get_the_category();
                             foreach ($categories as $category) {
                                 echo "<a href='" . get_category_link($category->term_id) . "' class='post-cate'>" . $category->cat_name . "</a>";
-                            } ?> / <i
-                                    class="fas fa-comment"></i> <?php comments_number('没有评论', '1 条评论', '% 条评论'); ?></span>
+                            } ?></span>
                     </article>
                 <?php endwhile; ?>
             <?php endif; ?>

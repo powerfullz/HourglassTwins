@@ -1,5 +1,9 @@
 # 沙漏双星 HourglassTwins
 
+自用 Wordpress 主题，在原主题的基础上做了一些样式上的微调以及一些 Bug Fixes 来满足我的需求。
+
+---
+
 ![](https://cdn.jsdelivr.net/gh/hjthjthjt/HourglassTwins/screenshot.png)
 
 ⏳那个星系的第一个 WordPress 主题⌛

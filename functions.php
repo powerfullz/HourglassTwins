@@ -41,7 +41,7 @@ function custom_upload_filter($file)
 add_filter('the_content', 'fancybox');
 function fancybox($content)
 {
-    $pattern = array("/<img(.*?)src=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|swf)('|\")(.*?)>/i", "/<a(.*?)href=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|swf)('|\")(.*?)>(.*?)<\/a>/i");
+    $pattern = array("/<img(.*?)src=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|swf|webp)('|\")(.*?)>/i", "/<a(.*?)href=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|swf|webp)('|\")(.*?)>(.*?)<\/a>/i");
     $replacement = array('<a$1href=$2$3.$4$5 data-fancybox="gallery"><img$1src=$2$3.$4$5$6></a>', '<a$1href=$2$3.$4$5 data-fancybox="gallery"$6>$7</a>');
     $content = preg_replace($pattern, $replacement, $content);
     return $content;
