@@ -25,8 +25,8 @@
 <a class="to-top" name="top"></a>
 <div id="page">
     <header id="masthead">
-        <h1><a class="header-title" href="<?php bloginfo('url'); ?>" rel="home"><?php bloginfo('name'); ?></a><span
-                    class="logo_dot"></span></h1>
+        <p><a class="header-title" href="<?php bloginfo('url'); ?>" rel="home"><?php bloginfo('name'); ?></a><span
+                    class="logo_dot"></span></p>
 
         <?php if (has_nav_menu('ht_menu')) { ?>
             <?php
