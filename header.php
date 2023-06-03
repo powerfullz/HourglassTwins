@@ -11,7 +11,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <?php if (is_single() || is_page()) { ?>
         <meta property="og:title" name="title" content="<?php the_title(); ?>"/>
-        <meta property="og:description" content="<?php the_excerpt(); ?>"/>
+        <meta property="og:description" content="<?php strip_tags(the_excerpt()); ?>"/>
         <meta property="og:site_name" content="<?php bloginfo("name"); ?>"/>
     <?php } else { ?>
         <meta property="og:title" content="<?php bloginfo("name"); ?>"/>

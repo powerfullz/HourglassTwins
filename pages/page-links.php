@@ -22,7 +22,7 @@ get_header();
                 if (!empty($bookmarks)) {
                     echo '<ul class="link-content clearfix">';
                     foreach ($bookmarks as $bookmark) {
-                        echo '<li><a href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" ><span class="sitename">' . $bookmark->link_name . "（" . $bookmark->link_url . "）" . '</span></a></li>';
+                        echo '<li><a href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" ><span class="sitename">' . $bookmark->link_name . '</span></a></li>';
                     }
                     echo '</ul>';
                 }
