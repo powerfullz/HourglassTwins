@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: 友链页面
+Template Name: 友情链接
 */
 get_header();
 ?>
@@ -22,7 +22,14 @@ get_header();
                 if (!empty($bookmarks)) {
                     echo '<ul class="link-content clearfix">';
                     foreach ($bookmarks as $bookmark) {
-                        echo '<li><a href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" ><span class="sitename">' . $bookmark->link_name . '</span></a></li>';
+                        $temp = '<li><a href="' . $bookmark->link_url . '" title="' . $bookmark->link_description .'" ';
+                        if (!empty($bookmark->link_rel)){
+                            $temp = $temp.'rel="'. $bookmark->link_rel . '" target="_blank" >' . '<span class="sitename">' . $bookmark->link_name . '</span></a></li>';
+                        }
+                        else{
+                            $temp = $temp.'target="_blank" >' . '<span class="sitename">' . $bookmark->link_name . '</span></a></li>';
+                        }
+                        echo $temp;
                     }
                     echo '</ul>';
                 }

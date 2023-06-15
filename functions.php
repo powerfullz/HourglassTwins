@@ -31,7 +31,7 @@ function custom_upload_filter($file)
 {
     $info = pathinfo($file['name']);
     $ext = $info['extension'];
-    $filedate = date('YmdHis') . rand(10, 99);//为了避免时间重复，再加一段2位的随机数
+    $filedate = date('YmdHis') . rand(10, 99); //为了避免时间重复，再加一段2位的随机数
     $file['name'] = $filedate . '.' . $ext;
     return $file;
 }
@@ -52,9 +52,11 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 
 
 //注册菜单
-register_nav_menus(array(
-    'ht_menu' => '菜单'
-));
+register_nav_menus(
+    array(
+        'ht_menu' => '菜单'
+    )
+);
 
 //文章目录TOC
 function article_toc($content)
@@ -108,7 +110,8 @@ function article_toc($content)
                 }
                 $content_toc .= "<li><a href=\"#title-$title_1\">$title_1 $title_word</a>";
             } else if ($title_number == "3") {
-                if ($title_2 == 0) $content_toc .= "<ul>";
+                if ($title_2 == 0)
+                    $content_toc .= "<ul>";
                 $title_2++;
                 $content = str_replace_limit("<h3>$title_word</h3>", "<h3 id=\"title-$title_1-$title_2\">$title_word</h3>", $content);
                 if ($title_3 != 0) {
@@ -118,14 +121,17 @@ function article_toc($content)
                 $content_toc .= "<li><a href=\"#title-$title_1-$title_2\">$title_1.$title_2 $title_word</a>";
 
             } else if ($title_number == "4") {
-                if ($title_3 == 0) $content_toc .= "<ul>";
+                if ($title_3 == 0)
+                    $content_toc .= "<ul>";
                 $title_3++;
                 $content = str_replace_limit("<h4>$title_word</h4>", "<h4 id=\"title-$title_1-$title_2-$title_3\">$title_word</h4>", $content);
                 $content_toc .= "<li><a href=\"#title-$title_1-$title_2-$title_3\">$title_1.$title_2.$title_3 $title_word</a></li>";
             }
         }
-        if ($title_3 != 0) $content_toc .= "</ul></li>";
-        if ($title_2 != 0) $content_toc .= "</ul></li>";
+        if ($title_3 != 0)
+            $content_toc .= "</ul></li>";
+        if ($title_2 != 0)
+            $content_toc .= "</ul></li>";
         $content_toc .= "</ul>";
         $flag = true;
         //修改文章内部链接完成
@@ -143,7 +149,8 @@ function HT_GetUserAgent($ua)
      */
 
     /* 浏览器 */
-    $br = "<i class='fab fa-safari' style='font-size: 20px'> public</i> UNKNOWN";;
+    $br = "<i class='fab fa-safari' style='font-size: 20px'> public</i> UNKNOWN";
+    ;
     $br = $br = "<i class=\"fab fa-safari\"></i> UNKNOWN";
     $br_v = null;
 
@@ -232,18 +239,19 @@ function HT_GetUserAgent($ua)
 //邮件通知 by Qiqiboy
 function comment_mail_notify($comment_id)
 {
-    $comment = get_comment($comment_id);//根据id获取这条评论相关数据
+    $comment = get_comment($comment_id); //根据id获取这条评论相关数据
     $content = $comment->comment_content;
     //对评论内容进行匹配
     $match_count = preg_match_all('/<a href="#comment-([0-9]+)?" rel="nofollow">/si', $content, $matchs);
-    if ($match_count > 0) {//如果匹配到了
-        foreach ($matchs[1] as $parent_id) {//对每个子匹配都进行邮件发送操作
+    if ($match_count > 0) { //如果匹配到了
+        foreach ($matchs[1] as $parent_id) { //对每个子匹配都进行邮件发送操作
             SimPaled_send_email($parent_id, $comment);
         }
-    } elseif ($comment->comment_parent != '0') {//以防万一，有人故意删了@回复，还可以通过查找父级评论id来确定邮件发送对象
+    } elseif ($comment->comment_parent != '0') { //以防万一，有人故意删了@回复，还可以通过查找父级评论id来确定邮件发送对象
         $parent_id = $comment->comment_parent;
         SimPaled_send_email($parent_id, $comment);
-    } else return;
+    } else
+        return;
 }
 
 add_action('comment_post', 'comment_mail_notify');
@@ -251,10 +259,10 @@ add_action('comment_post', 'comment_mail_notify');
 //发送邮件的函数 by Qiqiboy.com
 function SimPaled_send_email($parent_id, $comment)
 {
-    $admin_email = get_bloginfo('admin_email');//管理员邮箱
-    $parent_comment = get_comment($parent_id);//获取被回复人（或叫父级评论）相关信息
-    $author_email = $comment->comment_author_email;//评论人邮箱
-    $to = trim($parent_comment->comment_author_email);//被回复人邮箱
+    $admin_email = get_bloginfo('admin_email'); //管理员邮箱
+    $parent_comment = get_comment($parent_id); //获取被回复人（或叫父级评论）相关信息
+    $author_email = $comment->comment_author_email; //评论人邮箱
+    $to = trim($parent_comment->comment_author_email); //被回复人邮箱
     $spam_confirmed = $comment->comment_approved;
     if ($spam_confirmed != 'spam' && $to != $admin_email && $to != $author_email) {
 
@@ -276,26 +284,34 @@ function SimPaled_send_email($parent_id, $comment)
 }
 
 //文章归档，来自 https://zww.me
-function zww_archives_list() {
-    if( !$output = get_option('zww_db_cache_archives_list') ){
+function zww_archives_list()
+{
+    if (!$output = get_option('zww_db_cache_archives_list')) {
         $output = '<div id="archives"><p>[<a id="al_expand_collapse" href="#">全部展开/收缩</a>] <em>(注: 点击月份可以展开)</em></p>';
-        $the_query = new WP_Query( 'posts_per_page=-1&ignore_sticky_posts=1' ); //update: 加上忽略置顶文章
-        $year=0; $mon=0; $i=0; $j=0;
-        while ( $the_query->have_posts() ) : $the_query->the_post();
+        $the_query = new WP_Query('posts_per_page=-1&ignore_sticky_posts=1'); //update: 加上忽略置顶文章
+        $year = 0;
+        $mon = 0;
+        $i = 0;
+        $j = 0;
+        while ($the_query->have_posts()):
+            $the_query->the_post();
             $year_tmp = get_the_time('Y');
             $mon_tmp = get_the_time('m');
-            $y=$year; $m=$mon;
-            if ($mon != $mon_tmp && $mon > 0) $output .= '</ul></li>';
-            if ($year != $year_tmp && $year > 0) $output .= '</ul>';
+            $y = $year;
+            $m = $mon;
+            if ($mon != $mon_tmp && $mon > 0)
+                $output .= '</ul></li>';
+            if ($year != $year_tmp && $year > 0)
+                $output .= '</ul>';
             if ($year != $year_tmp) {
                 $year = $year_tmp;
-                $output .= '<h3 class="al_year">'. $year .' 年</h3><ul class="al_mon_list">'; //输出年份
+                $output .= '<h3 class="al_year">' . $year . ' 年</h3><ul class="al_mon_list">'; //输出年份
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
-                $output .= '<li><span class="al_mon">'. $mon .' 月</span><ul class="al_post_list">'; //输出月份
+                $output .= '<li><span class="al_mon">' . $mon . ' 月</span><ul class="al_post_list">'; //输出月份
             }
-            $output .= '<li>'. get_the_time('d日: ') .'<a href="'. get_permalink() .'">'. get_the_title() .'</a> <em>('. get_comments_number('0', '1', '%') .')</em></li>'; //输出文章日期和标题
+            $output .= '<li>' . get_the_time('d日: ') . '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <em>(' . get_comments_number('0', '1', '%') . ')</em></li>'; //输出文章日期和标题
         endwhile;
         wp_reset_postdata();
         $output .= '</ul></li></ul></div>';
@@ -313,28 +329,82 @@ add_action('save_post', 'clear_db_cache_archives_list'); // 新发表文章/修�
 
 require('resource/js/ajax-comment/main.php');
 
+/**
+ * WordPress友情链接添加nofollow属性标签
+ * https://www.chenweiliang.com/cwl-28448.html
+ * 添加两个钩子是为了确保代码只在links页面显示
+ * 如果你想了解更多load-$page action的信息，访问http://codex.wordpress.org/Adding_Administration_Menus#Page_Hook_Suffix
+ **/
+add_action('load-link.php', 'sola_blogroll_nofollow');
+add_action('load-link-add.php', 'sola_blogroll_nofollow');
+
+function sola_blogroll_nofollow()
+{
+    //通过action add_meta_boxes创建我们需要的Meta Box
+    add_action('add_meta_boxes', 'sola_blogroll_add_meta_box', 1, 1);
+    //通过filter pre_link_rel将数据保存
+    add_filter('pre_link_rel', 'sola_blogroll_save_meta_box', 10, 1);
+}
+
+//创建Nofollow Meta Box
+function sola_blogroll_add_meta_box()
+{
+    add_meta_box('sola_blogroll_nofollow_div', __('Nofollow标签'), 'sola_blogroll_inner_meta_box', 'link', 'side');
+}
+
+//输出Meta Box的HTML结构
+function sola_blogroll_inner_meta_box($post)
+{
+    $bookmark = get_bookmark($post->ID, 'ARRAY_A');
+    if (strpos($bookmark['link_rel'], 'nofollow') !== FALSE)
+        $checked = ' checked="checked"';
+    else
+        $checked = '';
+    ?>
+    <label for="sola_blogroll_nofollow_checkbox">
+        <?php echo __('是否添加Nofollow标签?'); ?>
+    </label>
+    <input value="1" id="sola_blogroll_nofollow_checkbox" name="sola_blogroll_nofollow_checkbox" <?php echo $disabled; ?>
+        type="checkbox" <?php echo $checked; ?> /> <?php echo $message; ?>
+<?php
+}
+
+//保存用户的选择
+function sola_blogroll_save_meta_box($link_rel)
+{
+    $rel = trim(str_replace('nofollow', '', $link_rel));
+    if ($_POST['sola_blogroll_nofollow_checkbox'])
+        $rel .= ' nofollow';
+    return trim($rel);
+}
+
+
 //自定义评论列表模板，来自 https://dedewp.com/17366.html
 function zmblog_comment($comment, $args, $depth)
 {
-$GLOBALS['comment'] = $comment; ?>
-<li class="comment" id="li-comment-<?php comment_ID(); ?>">
-    <div class="media">
-        <div class="media-left">
-            <?php if (function_exists('get_avatar') && get_option('show_avatars')) {
-                echo get_avatar($comment, 48);
-            } ?>
-        </div>
-        <div class="media-body">
-            <?php printf(__('<p class="author_name">%s'), get_comment_author_link());
-            echo str_replace(chr(32), '&nbsp;', "   ") . HT_GetUserAgent($comment->comment_agent) . "</p>"; ?>
-            <div class="comment-metadata">
-   			<span class="comment-pub-time">
-   				<?php echo get_comment_time('Y-m-d H:i') . " ";
-                if ($comment->comment_approved == '0') echo "<em>您的评论需要等待审核…</em>" ?>
-   			</span>
-                <?php comment_reply_link(array_merge($args, array('reply_text' => '<i class=\"fas fa-reply\"></i> 回复', 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?> <?php edit_comment_link(__('(Edit)'), '&nbsp;&nbsp;', ''); ?>
+    $GLOBALS['comment'] = $comment; ?>
+    <li class="comment" id="li-comment-<?php comment_ID(); ?>">
+        <div class="media">
+            <div class="media-left">
+                <?php if (function_exists('get_avatar') && get_option('show_avatars')) {
+                    echo get_avatar($comment, 48);
+                } ?>
             </div>
-            <div class="tm-comment-text"><?php comment_text(); ?></div>
+            <div class="media-body">
+                <?php printf(__('<p class="author_name">%s'), get_comment_author_link());
+                echo str_replace(chr(32), '&nbsp;', "   ") . HT_GetUserAgent($comment->comment_agent) . "</p>"; ?>
+                <div class="comment-metadata">
+                    <span class="comment-pub-time">
+                        <?php echo get_comment_time('Y-m-d H:i') . " ";
+                        if ($comment->comment_approved == '0')
+                            echo "<em>您的评论需要等待审核…</em>" ?>
+                        </span>
+                    <?php comment_reply_link(array_merge($args, array('reply_text' => '<i class=\"fas fa-reply\"></i> 回复', 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+                    <?php edit_comment_link(__('(Edit)'), '&nbsp;&nbsp;', ''); ?>
+                </div>
+                <div class="tm-comment-text">
+                    <?php comment_text(); ?>
+                </div>
+            </div>
         </div>
-    </div>
     <?php } ?>
